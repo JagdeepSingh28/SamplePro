@@ -7,6 +7,7 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.jagdeepsingh.samplepro.R;
@@ -14,27 +15,38 @@ import com.example.jagdeepsingh.samplepro.R;
 /**
  * Created by jagdeep.singh on 22-08-2016.
  */
-public class BottomActivity extends AppCompatActivity {
+public class BottomActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = BottomActivity.class.getSimpleName();
-    LinearLayout bottom_sheet;
+    View bottom_sheet;
+    BottomSheetBehavior bottomSheetBehavior;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottom_sheet_screen);
 
-        bottom_sheet = (LinearLayout)findViewById(R.id.bottom_sheet);
+        bottom_sheet = findViewById(R.id.bottom_sheet);
 
-        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet);
+        Button button1 = (Button) findViewById( R.id.button_1 );
+        Button button2 = (Button) findViewById( R.id.button_2 );
+        Button button3 = (Button) findViewById( R.id.button_3 );
+
+        button1.setOnClickListener(this);
+        button2.setOnClickListener(this);
+        button3.setOnClickListener(this);
+
+        bottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet);
 
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        bottomSheetBehavior.setPeekHeight(320);
-        bottomSheetBehavior.setHideable(false);
+
 
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    bottomSheetBehavior.setPeekHeight(128);
+                }
                 Log.i(TAG, "onStateChanged: ");
             }
 
@@ -43,5 +55,23 @@ public class BottomActivity extends AppCompatActivity {
                 Log.i(TAG, "onSlide: ");
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch( v.getId() ) {
+            case R.id.button_1: {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                break;
+            }
+            case R.id.button_2: {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                break;
+            }
+            case R.id.button_3: {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                break;
+            }
+        }
     }
 }

@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/lib/com.example.jagdeepsingh.samplepro"
-    android:id="@+id/bottom_sheet"
+    android:id="@+id/bottom_sheet_"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="340dp"
