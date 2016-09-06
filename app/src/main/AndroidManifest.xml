@@ -41,12 +41,17 @@
         </activity>
 
         <activity android:name=".material.bottomSheet.BottomActivity">
+        </activity>
+
+        <activity android:name=".camera.AndroidCameraApi2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".camera.service.SimpleCamera2ServicePublish"/>
     </application>
 
 </manifest>
