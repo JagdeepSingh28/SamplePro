@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.jagdeepsingh.samplepro.R;
+import com.example.jagdeepsingh.samplepro.camera.service.MyCamera1Service;
 
 import java.io.File;
 import java.io.InputStream;
@@ -56,11 +57,17 @@ public class BasicCameraActivity extends AppCompatActivity {
 //                intent.setAction(Intent.ACTION_GET_CONTENT);
 //                intent.addCategory(Intent.CATEGORY_OPENABLE);
 
-                File file=getOutputMediaFile(1);
-                picUri = Uri.fromFile(file); // create
-                intent.putExtra(MediaStore.EXTRA_OUTPUT,picUri);
+                /**
+                 * for Basic Camera application
+                 */
 
-                startActivityForResult(intent,REQUEST_CODE);
+                startService(new Intent(BasicCameraActivity.this, MyCamera1Service.class));
+
+//                File file=getOutputMediaFile(1);
+//                picUri = Uri.fromFile(file); // create
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT,picUri);
+//
+//                startActivityForResult(intent,REQUEST_CODE);
             }
         });
     }

@@ -35,7 +35,9 @@ import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
 import com.example.jagdeepsingh.samplepro.R;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -50,7 +52,7 @@ import java.util.List;
 public class AndroidCameraApi extends AppCompatActivity {
     private static final String TAG = "AndroidCameraApi";
     private Button takePictureButton;
-    private TextureView textureView;
+
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
@@ -75,9 +77,12 @@ public class AndroidCameraApi extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_android_camera_api);
-        textureView = (TextureView) findViewById(R.id.texture);
-        assert textureView != null;
-        textureView.setSurfaceTextureListener(textureListener);
+//        textureView = (TextureView) findViewById(R.id.texture);
+//        assert textureView != null;
+//        textureView.setSurfaceTextureListener(textureListener);
+
+        openCamera();
+
         takePictureButton = (Button) findViewById(R.id.btn_takepicture);
         assert takePictureButton != null;
         takePictureButton.setOnClickListener(new View.OnClickListener() {
@@ -151,33 +156,35 @@ public class AndroidCameraApi extends AppCompatActivity {
             Log.e(TAG, "cameraDevice is null");
             return;
         }
-        CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
-        try {
-            CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraDevice.getId());
-            Size[] jpegSizes = null;
-            if (characteristics != null) {
-                jpegSizes = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP).getOutputSizes(ImageFormat.JPEG);
-            }
-            int width = 640;
-            int height = 480;
-            if (jpegSizes != null && 0 < jpegSizes.length) {
-                width = jpegSizes[0].getWidth();
-                height = jpegSizes[0].getHeight();
-            }
-            ImageReader reader = ImageReader.newInstance(width, height, ImageFormat.JPEG, 1);
+//        CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+//        try {
+//            CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraDevice.getId());
+//            Size[] jpegSizes = null;
+//            if (characteristics != null) {
+//                jpegSizes = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP).getOutputSizes(ImageFormat.JPEG);
+//            }
+//            int width = 640;
+//            int height = 480;
+//            if (jpegSizes != null && 0 < jpegSizes.length) {
+//                width = jpegSizes[0].getWidth();
+//                height = jpegSizes[0].getHeight();
+//            }
+//            ImageReader reader = ImageReader.newInstance(width, height, ImageFormat.JPEG, 1);
             List<Surface> outputSurfaces = new ArrayList<Surface>(2);
-            outputSurfaces.add(reader.getSurface());
-            outputSurfaces.add(new Surface(textureView.getSurfaceTexture()));
+            outputSurfaces.add(imageReader.getSurface());
+//            outputSurfaces.add(new Surface(textureView.getSurfaceTexture()));
+        try{
             final CaptureRequest.Builder captureBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
-            captureBuilder.addTarget(reader.getSurface());
+            captureBuilder.addTarget(imageReader.getSurface());
             captureBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
             // Orientation
             int rotation = getWindowManager().getDefaultDisplay().getRotation();
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
-            final File file = new File(Environment.getExternalStorageDirectory()+"/cam2pic.jpg");
+            final File file = new File(Environment.getExternalStorageDirectory()+"/pic2.jpg");
             ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
                 @Override
                 public void onImageAvailable(ImageReader reader) {
+                    Log.i(TAG, "onImageAvailable");
                     Image image = null;
                     try {
                         image = reader.acquireLatestImage();
@@ -196,6 +203,7 @@ public class AndroidCameraApi extends AppCompatActivity {
                     }
                 }
                 private void save(byte[] bytes) throws IOException {
+                    Log.i(TAG, "onImageAvailable Image Saved");
                     OutputStream output = null;
                     try {
                         output = new FileOutputStream(file);
@@ -207,7 +215,7 @@ public class AndroidCameraApi extends AppCompatActivity {
                     }
                 }
             };
-            reader.setOnImageAvailableListener(readerListener, mBackgroundHandler);
+            imageReader.setOnImageAvailableListener(readerListener, mBackgroundHandler);
             final CameraCaptureSession.CaptureCallback captureListener = new CameraCaptureSession.CaptureCallback() {
                 @Override
                 public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
@@ -235,13 +243,29 @@ public class AndroidCameraApi extends AppCompatActivity {
     }
     protected void createCameraPreview() {
         try {
-            SurfaceTexture texture = textureView.getSurfaceTexture();
-            assert texture != null;
-            texture.setDefaultBufferSize(imageDimension.getWidth(), imageDimension.getHeight());
-            Surface surface = new Surface(texture);
+//            SurfaceTexture texture = textureView.getSurfaceTexture();
+//            assert texture != null;
+//            texture.setDefaultBufferSize(imageDimension.getWidth(), imageDimension.getHeight());
+//            Surface surface = new Surface(texture);
+
+            CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+
+                CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraDevice.getId());
+                Size[] jpegSizes = null;
+                if (characteristics != null) {
+                    jpegSizes = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP).getOutputSizes(ImageFormat.JPEG);
+                }
+                int width = 640;
+                int height = 480;
+                if (jpegSizes != null && 0 < jpegSizes.length) {
+                    width = jpegSizes[0].getWidth();
+                    height = jpegSizes[0].getHeight();
+                }
+                imageReader = ImageReader.newInstance(width, height, ImageFormat.RAW_SENSOR, 1);
+
             captureRequestBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
-            captureRequestBuilder.addTarget(surface);
-            cameraDevice.createCaptureSession(Arrays.asList(surface), new CameraCaptureSession.StateCallback(){
+            captureRequestBuilder.addTarget(imageReader.getSurface());
+            cameraDevice.createCaptureSession(Arrays.asList(imageReader.getSurface()), new CameraCaptureSession.StateCallback(){
                 @Override
                 public void onConfigured(@NonNull CameraCaptureSession cameraCaptureSession) {
                     //The camera is already closed
@@ -261,7 +285,7 @@ public class AndroidCameraApi extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    
+
     private void openCamera() {
         CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         Log.e(TAG, "is camera open");
@@ -318,11 +342,11 @@ public class AndroidCameraApi extends AppCompatActivity {
         super.onResume();
         Log.e(TAG, "onResume");
         startBackgroundThread();
-        if (textureView.isAvailable()) {
-            openCamera();
-        } else {
-            textureView.setSurfaceTextureListener(textureListener);
-        }
+//        if (textureView.isAvailable()) {
+//            openCamera();
+//        } else {
+//            textureView.setSurfaceTextureListener(textureListener);
+//        }
     }
     @Override
     protected void onPause() {

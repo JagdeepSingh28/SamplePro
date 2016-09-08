@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jagdeepsingh.samplepro.material.faceDetection.FaceDetectionActivity">
+
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Take Picture"
+        android:onClick="TakePic"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:id="@+id/btn_face_detect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detect Face"
+        android:onClick="DetectFace"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentRight="true"
+        />
+
+<com.example.jagdeepsingh.samplepro.material.faceDetection.view.FaceOverLayView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/face_detect_id"
+    android:layout_below="@+id/btn">
+
+</com.example.jagdeepsingh.samplepro.material.faceDetection.view.FaceOverLayView>
+
+
+</RelativeLayout>

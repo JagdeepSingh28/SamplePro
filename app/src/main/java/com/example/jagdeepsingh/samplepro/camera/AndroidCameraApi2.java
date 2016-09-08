@@ -55,9 +55,9 @@ public class AndroidCameraApi2 extends AppCompatActivity {
     private TextureView textureView;
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     static {
-        ORIENTATIONS.append(Surface.ROTATION_0, 90);
-        ORIENTATIONS.append(Surface.ROTATION_90, 0);
-        ORIENTATIONS.append(Surface.ROTATION_180, 270);
+        ORIENTATIONS.append(Surface.ROTATION_0, 0);
+        ORIENTATIONS.append(Surface.ROTATION_90, 270);
+        ORIENTATIONS.append(Surface.ROTATION_180, 90);
         ORIENTATIONS.append(Surface.ROTATION_270, 180);
     }
     private String cameraId;
@@ -77,7 +77,7 @@ public class AndroidCameraApi2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_android_camera_api);
-        textureView = (TextureView) findViewById(R.id.texture);
+        textureView =  (TextureView) findViewById(R.id.texture);
         assert textureView != null;
         textureView.setSurfaceTextureListener(textureListener);
         takePictureButton = (Button) findViewById(R.id.btn_takepicture);
@@ -174,12 +174,14 @@ public class AndroidCameraApi2 extends AppCompatActivity {
             captureBuilder.addTarget(reader.getSurface());
             captureBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
             // Orientation
-            int rotation = getWindowManager().getDefaultDisplay().getRotation();
+            int rotation = getWindowManager().getDefaultDisplay().getRotation() +1;
+            Log.i(TAG, "takePicture: orientation is" + rotation);
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
-            final File file = new File(Environment.getExternalStorageDirectory()+"/pic.jpg");
+            final File file = new File(Environment.getExternalStorageDirectory()+"/pic2.jpg");
             ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
                 @Override
                 public void onImageAvailable(ImageReader reader) {
+                    Log.i(TAG, "onImageAvailable");
                     Image image = null;
                     try {
                         image = reader.acquireLatestImage();
@@ -198,10 +200,16 @@ public class AndroidCameraApi2 extends AppCompatActivity {
                     }
                 }
                 private void save(byte[] bytes) throws IOException {
+                    Log.i(TAG, "onImageAvailable Image Saved");
                     OutputStream output = null;
                     try {
                         output = new FileOutputStream(file);
                         output.write(bytes);
+
+//                        Intent intent= new Intent();
+//                        intent.putExtra("file",file.toString());
+//                        setResult(Activity.RESULT_OK,intent);
+//                        finish();
                     } finally {
                         if (null != output) {
                             output.close();

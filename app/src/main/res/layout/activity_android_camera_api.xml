@@ -6,8 +6,8 @@
     android:orientation="vertical">
     <TextureView
         android:id="@+id/texture"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
         android:layout_above="@+id/btn_takepicture"
         android:layout_alignParentTop="true"/>
     <Button

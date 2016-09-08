@@ -6,8 +6,10 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -19,39 +21,41 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAqFovy_6CmSHPJIodZ7VeDrCE5QGIR3J8" />
 
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".asyncTask.ExecutorActivity"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".asyncTask.ExecutorActivity" />
         <activity
             android:name=".headless.HeadlessActivity"
-            android:screenOrientation="fullSensor"></activity>
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".recycler.MyRecyclerActivity"
-            android:screenOrientation="fullSensor"></activity>
-        <activity android:name=".map.MapActivity">
-
-        </activity>
-        <activity android:name=".camera.BasicCameraActivity">
-        </activity>
-
-        <activity android:name=".camera.AndroidCameraApi">
-
-        </activity>
-
-        <activity android:name=".camera.AndroidBackgroundCameraAPI">
-        </activity>
-
-        <activity android:name=".material.bottomSheet.BottomActivity">
-        </activity>
-
-        <activity android:name=".camera.AndroidCameraApi2">
+            android:screenOrientation="fullSensor" />
+        <activity android:name=".map.MapActivity"></activity>
+        <activity android:name=".camera.BasicCameraActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".camera.AndroidCameraApi" />
+        <activity android:name=".camera.AndroidBackgroundCameraAPI" />
+        <activity android:name=".material.bottomSheet.BottomActivity" />
 
-        <service android:name=".camera.service.SimpleCamera2ServicePublish"/>
+        <!-- working copy of camera 2 -->
+        <activity android:name=".camera.AndroidCameraApi2">
+
+        </activity>
+
+        <service android:name=".camera.service.SimpleCamera2ServicePublish" />
+
+        <activity android:name=".camera.MyCustomCamera2"></activity>
+        <!-- FaceDetector API example -->
+        <activity android:name=".material.faceDetection.FaceDetectionActivity"></activity>
+
+        <service
+            android:name=".camera.service.MyCamera1Service"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
