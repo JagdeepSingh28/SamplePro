@@ -29,33 +29,36 @@
         <activity
             android:name=".recycler.MyRecyclerActivity"
             android:screenOrientation="fullSensor" />
-        <activity android:name=".map.MapActivity"></activity>
-        <activity android:name=".camera.BasicCameraActivity" >
+        <activity android:name=".map.MapActivity" />
+        <activity android:name=".camera.BasicCameraActivity"></activity>
+        <activity android:name=".camera.AndroidCameraApi" />
+        <activity android:name=".camera.AndroidBackgroundCameraAPI" />
+        <activity android:name=".material.bottomSheet.BottomActivity" />
+
+        <!-- working copy of camera 2 -->
+        <activity android:name=".camera.AndroidCameraApi2" />
+
+        <service android:name=".camera.service.SimpleCamera2ServicePublish" />
+
+        <activity android:name=".camera.MyCustomCamera2" />
+        <!-- FaceDetector API example -->
+        <activity android:name=".material.faceDetection.FaceDetectionActivity" />
+
+        <service
+            android:name=".camera.service.MyCamera1Service"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".material.transition.FirstTransitionActivity">
+        </activity>
+        <activity android:name=".material.transition.SecondTransitionActivity" />
+        <activity android:name=".wear.SelfNotificationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".camera.AndroidCameraApi" />
-        <activity android:name=".camera.AndroidBackgroundCameraAPI" />
-        <activity android:name=".material.bottomSheet.BottomActivity" />
-
-        <!-- working copy of camera 2 -->
-        <activity android:name=".camera.AndroidCameraApi2">
-
-        </activity>
-
-        <service android:name=".camera.service.SimpleCamera2ServicePublish" />
-
-        <activity android:name=".camera.MyCustomCamera2"></activity>
-        <!-- FaceDetector API example -->
-        <activity android:name=".material.faceDetection.FaceDetectionActivity"></activity>
-
-        <service
-            android:name=".camera.service.MyCamera1Service"
-            android:enabled="true"
-            android:exported="true"></service>
     </application>
 
 </manifest>
