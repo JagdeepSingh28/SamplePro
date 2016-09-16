@@ -30,7 +30,7 @@
             android:name=".recycler.MyRecyclerActivity"
             android:screenOrientation="fullSensor" />
         <activity android:name=".map.MapActivity" />
-        <activity android:name=".camera.BasicCameraActivity"></activity>
+        <activity android:name=".camera.BasicCameraActivity" />
         <activity android:name=".camera.AndroidCameraApi" />
         <activity android:name=".camera.AndroidBackgroundCameraAPI" />
         <activity android:name=".material.bottomSheet.BottomActivity" />
@@ -49,16 +49,33 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".material.transition.FirstTransitionActivity">
-        </activity>
+        <activity android:name=".material.transition.FirstTransitionActivity" />
         <activity android:name=".material.transition.SecondTransitionActivity" />
-        <activity android:name=".wear.SelfNotificationActivity">
+        <activity android:name=".wear.SelfNotificationActivity" />
+        <activity android:name=".firebase.realTimeDatabase.activity.UploadUserActivity" />
+        <activity android:name=".services.MyServiceActivity">
+
+        </activity>
+
+        <service
+            android:name=".services.MySimpleService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".services.MyIntentService"
+            android:exported="false" />
+
+        <activity android:name=".DownloadManager.DownloadManagerActivity" />
+        <activity android:name=".firebase.LoginReg.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".firebase.LoginReg.RegisterationActivity" />
+        <activity android:name=".firebase.LoginReg.ForgotPasswordActivity" />
+        <activity android:name=".firebase.LoginReg.DashboardActivity"></activity>
     </application>
 
 </manifest>
