@@ -11,7 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-
+import android.widget.Toast;
 import com.example.jagdeepsingh.samplepro.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -21,7 +21,6 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -54,7 +53,9 @@ public class MapActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map_screen);
 
+        // Getting Map from the XML
         mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+        //Setting the Listener to the mapFragment on MapReady CallBack
         mapFragment.getMapAsync(this);
 
     }
@@ -81,22 +82,19 @@ public class MapActivity extends AppCompatActivity implements
         googleApiClient.disconnect();
     }
 
+    /**
+     * Google API client callback
+     * @param bundle
+     */
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         Log.i(TAG, "onConnected: ");
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            // Request missing location permission.
 
+            // Request missing location permission.
             permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
             permissionList.add(Manifest.permission.ACCESS_COARSE_LOCATION);
-
-//            ActivityCompat.requestPermissions(this,
-//                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-//                                Manifest.permission.ACCESS_COARSE_LOCATION,
-//                                Manifest.permission.BLUETOOTH,
-//                                Manifest.permission.CAMERA},
-//                    REQUEST_CODE_LOCATION);
 
             ActivityCompat.requestPermissions(this,
                     permissionList.toArray(new String[permissionList.size()]),
@@ -104,14 +102,15 @@ public class MapActivity extends AppCompatActivity implements
 
         } else {
             location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
-
         }
 
+        // Checking if location is not null
         if(location!=null){
             Log.i(TAG, "onConnected: Latitude is" + location.getLatitude());
             Log.i(TAG, "onConnected: Longitude is" + location.getLongitude());
             locallatLng = new LatLng(location.getLatitude(), location.getLongitude());
 
+            // With Help of GeoCoder class getting the Name of Location according to lat long given
             Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
             StringBuilder builder = new StringBuilder();
             try {
@@ -123,11 +122,12 @@ public class MapActivity extends AppCompatActivity implements
                     builder.append(" ");
                 }
 
-                String fnialAddress = builder.toString(); //This is the complete address.
+                String finalAddress = builder.toString(); //This is the complete address.
 
+                // setting the marker with the place name
                 googleMap.addMarker(new MarkerOptions().position(
                         locallatLng)
-                        .title(fnialAddress));
+                        .title(finalAddress));
         }catch (Exception e){
             }
         }
@@ -143,25 +143,34 @@ public class MapActivity extends AppCompatActivity implements
         Log.i(TAG, "onConnectionFailed: ");
     }
 
+    /**
+     * Permission call backs
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        if(requestCode == REQUEST_CODE_LOCATION){
-//            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if(requestCode == REQUEST_CODE_LOCATION){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 Log.i(TAG, "onRequestPermissionsResult: Permission Granted");
-//            }else{
-//                Toast.makeText(MapActivity.this, "Permission not granted", Toast.LENGTH_SHORT).show();
-//            }
-//        }
+            }else{
+                Toast.makeText(MapActivity.this, "Permission not granted", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Log.i(TAG, "onMapReady: ");
+        // Getting and assigning the googleMap to local variable
         this.googleMap = googleMap;
+
+        // Adding marker to given lat long
         googleMap.addMarker(new MarkerOptions().position(
                 PERTH)
-                .title("Current Position"));
+                .title("PERTH"));
 
+        // After Building the map successfully call the buildGoogleAPIClient to get the Current Location
         buildGoogleAPIclient();
 
     }

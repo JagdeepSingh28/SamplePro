@@ -10,8 +10,17 @@
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    // Permission for wif peer to peer
+    <uses-permission
+        android:name="android.permission.ACCESS_WIFI_STATE"
+        android:required="true" />
+    <uses-permission
+        android:name="android.permission.CHANGE_WIFI_STATE"
+        android:required="true" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -53,9 +62,7 @@
         <activity android:name=".material.transition.SecondTransitionActivity" />
         <activity android:name=".wear.SelfNotificationActivity" />
         <activity android:name=".firebase.realTimeDatabase.activity.UploadUserActivity" />
-        <activity android:name=".services.MyServiceActivity">
-
-        </activity>
+        <activity android:name=".services.MyServiceActivity" />
 
         <service
             android:name=".services.MySimpleService"
@@ -66,16 +73,26 @@
             android:exported="false" />
 
         <activity android:name=".DownloadManager.DownloadManagerActivity" />
-        <activity android:name=".firebase.LoginReg.LoginActivity">
+        <activity android:name=".firebase.LoginReg.LoginActivity" />
+        <activity android:name=".firebase.LoginReg.RegisterationActivity" />
+        <activity android:name=".firebase.LoginReg.ForgotPasswordActivity" />
+        <activity android:name=".firebase.LoginReg.DashboardActivity" />
+        <activity android:name=".map.PolylineDemoActivity" />
+        <activity android:name=".material.constraint.ConstraintActivity"></activity>
+        <activity android:name=".material.constraint.ConstraintRegister" />
+        <activity android:name=".wirelessConnectivity.NsdChatActivity">
+        </activity>
+        <activity android:name=".wirelessConnectivity.p2p.P2pActivity" />
+        <activity android:name=".imageCaching.CacheDemoActivity">
+
+        </activity>
+        <activity android:name=".imageCaching.demo.ImageViewFromURLActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".firebase.LoginReg.RegisterationActivity" />
-        <activity android:name=".firebase.LoginReg.ForgotPasswordActivity" />
-        <activity android:name=".firebase.LoginReg.DashboardActivity"></activity>
     </application>
 
 </manifest>
