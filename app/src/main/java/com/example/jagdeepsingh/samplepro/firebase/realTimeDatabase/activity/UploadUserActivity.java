@@ -21,6 +21,8 @@ public class UploadUserActivity extends AppCompatActivity implements View.OnClic
     EditText name_et;
     EditText password_et;
     Button submit_btn;
+    Button led_on;
+    Button led_off;
     Firebase firebase;
 
     @Override
@@ -40,6 +42,10 @@ public class UploadUserActivity extends AppCompatActivity implements View.OnClic
         name_et         = (EditText)findViewById(R.id.name_et);
         password_et     = (EditText)findViewById(R.id.password_et);
         submit_btn      = (Button)findViewById(R.id.submit_btn);
+        led_on          = (Button)findViewById(R.id.led_on);
+        led_off         = (Button)findViewById(R.id.led_off);
+        led_on.setOnClickListener(this);
+        led_off.setOnClickListener(this);
         submit_btn.setOnClickListener(this);
 
         /**
@@ -52,38 +58,48 @@ public class UploadUserActivity extends AppCompatActivity implements View.OnClic
         /**
          * Getting data from fireBase Real Time Database
          */
-        firebase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
-                    Person person = postSnapshot.getValue(Person.class);
-                    name_et.setText(person.getName());
-                    password_et.setText(person.getPassword());
-                }
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                Toast.makeText(UploadUserActivity.this, "Failed To retrieve Data", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        firebase.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+//                    Person person = postSnapshot.getValue(Person.class);
+//                    name_et.setText(person.getName());
+//                    password_et.setText(person.getPassword());
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(FirebaseError firebaseError) {
+//                Toast.makeText(UploadUserActivity.this, "Failed To retrieve Data", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     @Override
     public void onClick(View v) {
-        if(TextUtils.isEmpty(name_et.getText().toString()) &&
-                TextUtils.isEmpty(name_et.getText().toString())){
-            Toast.makeText(UploadUserActivity.this, "Please fill Fields", Toast.LENGTH_SHORT).show();
-        }else{
+        switch (v.getId()){
+            case R.id.submit_btn:
+                if(TextUtils.isEmpty(name_et.getText().toString()) &&
+                        TextUtils.isEmpty(name_et.getText().toString())){
+                    Toast.makeText(UploadUserActivity.this, "Please fill Fields", Toast.LENGTH_SHORT).show();
+                }else{
 
-            /**
-             * Sending data to fireBase Real Time Database in form of object
-             */
-            Person person = new Person();
-            person.setName(name_et.getText().toString());
-            person.setPassword(password_et.getText().toString());
+                    /**
+                     * Sending data to fireBase Real Time Database in form of object
+                     */
+                    Person person = new Person();
+                    person.setName(name_et.getText().toString());
+                    person.setPassword(password_et.getText().toString());
 
-            firebase.child("Person").setValue(person);
+                    firebase.child("Person").setValue(person);
+                }
+                break;
+            case R.id.led_on:
+                firebase.setValue("down");
+                break;
+            case R.id.led_off:
+                firebase.setValue("up");
+                break;
         }
     }
 }

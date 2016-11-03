@@ -61,7 +61,15 @@
         <activity android:name=".material.transition.FirstTransitionActivity" />
         <activity android:name=".material.transition.SecondTransitionActivity" />
         <activity android:name=".wear.SelfNotificationActivity" />
-        <activity android:name=".firebase.realTimeDatabase.activity.UploadUserActivity" />
+        <activity android:name=".firebase.realTimeDatabase.activity.UploadUserActivity" >
+        </activity>
+        <activity android:name=".firebase.realTimeDatabase.activity.IotActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".services.MyServiceActivity" />
 
         <service
@@ -78,21 +86,18 @@
         <activity android:name=".firebase.LoginReg.ForgotPasswordActivity" />
         <activity android:name=".firebase.LoginReg.DashboardActivity" />
         <activity android:name=".map.PolylineDemoActivity" />
-        <activity android:name=".material.constraint.ConstraintActivity"></activity>
+        <activity android:name=".material.constraint.ConstraintActivity" />
         <activity android:name=".material.constraint.ConstraintRegister" />
-        <activity android:name=".wirelessConnectivity.NsdChatActivity">
-        </activity>
+        <activity android:name=".wirelessConnectivity.NsdChatActivity" />
         <activity android:name=".wirelessConnectivity.p2p.P2pActivity" />
-        <activity android:name=".imageCaching.CacheDemoActivity">
-
+        <activity android:name=".imageCaching.CacheDemoActivity" />
+        <activity android:name=".imageCaching.demo.ImageViewFromURLActivity"/>
+        <activity android:name=".contentProvider.DatabaseActivity" >
         </activity>
-        <activity android:name=".imageCaching.demo.ImageViewFromURLActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".contentProvider.CountryEdit"></activity>
+        <provider android:name=".contentProvider.MyContentProvider" android:exported="true"
+            android:readPermission="true" android:writePermission="true"
+            android:authorities="com.example.jagdeepsingh.samplepro.contentProvider" />
     </application>
 
 </manifest>

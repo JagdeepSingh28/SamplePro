@@ -58,4 +58,20 @@
         android:layout_gravity="center_horizontal"
         android:paddingTop="20dp" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LED ON"
+        android:id="@+id/led_on"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="20dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LED OFF"
+        android:id="@+id/led_off"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="20dp" />
+
 </LinearLayout>
