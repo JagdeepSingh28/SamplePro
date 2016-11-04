@@ -34,7 +34,13 @@
         <activity android:name=".asyncTask.ExecutorActivity" />
         <activity
             android:name=".headless.HeadlessActivity"
-            android:screenOrientation="fullSensor" />
+            android:screenOrientation="fullSensor" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".recycler.MyRecyclerActivity"
             android:screenOrientation="fullSensor" />
@@ -61,15 +67,8 @@
         <activity android:name=".material.transition.FirstTransitionActivity" />
         <activity android:name=".material.transition.SecondTransitionActivity" />
         <activity android:name=".wear.SelfNotificationActivity" />
-        <activity android:name=".firebase.realTimeDatabase.activity.UploadUserActivity" >
-        </activity>
-        <activity android:name=".firebase.realTimeDatabase.activity.IotActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".firebase.realTimeDatabase.activity.UploadUserActivity" />
+        <activity android:name=".firebase.realTimeDatabase.activity.IotActivity"></activity>
         <activity android:name=".services.MyServiceActivity" />
 
         <service
@@ -91,13 +90,30 @@
         <activity android:name=".wirelessConnectivity.NsdChatActivity" />
         <activity android:name=".wirelessConnectivity.p2p.P2pActivity" />
         <activity android:name=".imageCaching.CacheDemoActivity" />
-        <activity android:name=".imageCaching.demo.ImageViewFromURLActivity"/>
-        <activity android:name=".contentProvider.DatabaseActivity" >
+        <activity android:name=".imageCaching.demo.ImageViewFromURLActivity" />
+        <activity android:name=".contentProvider.DatabaseActivity" />
+        <activity android:name=".contentProvider.CountryEdit" />
+
+        <provider
+            android:name=".contentProvider.MyContentProvider"
+            android:authorities="com.example.jagdeepsingh.samplepro.contentProvider"
+            android:exported="true"
+            android:readPermission="true"
+            android:writePermission="true" />
+
+        <activity
+            android:name=".activity.ListActivity"
+            android:parentActivityName=".activity.LaunchActivity"></activity>
+        <activity
+            android:name=".activity.DetailActivity"
+            android:launchMode="singleTask"
+            android:parentActivityName=".activity.ListActivity" />
+        <activity android:name=".activity.LaunchActivity" />
+        <activity android:name=".material.collapsingToolBar.CollapsingToolbarActivity">
         </activity>
-        <activity android:name=".contentProvider.CountryEdit"></activity>
-        <provider android:name=".contentProvider.MyContentProvider" android:exported="true"
-            android:readPermission="true" android:writePermission="true"
-            android:authorities="com.example.jagdeepsingh.samplepro.contentProvider" />
+        <activity android:name=".webView.WebViewActivity">
+
+        </activity>
     </application>
 
 </manifest>
