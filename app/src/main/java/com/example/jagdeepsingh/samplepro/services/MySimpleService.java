@@ -22,7 +22,7 @@ public class MySimpleService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        Log.d(TAG, "onCreate: ");
     }
 
     @Override

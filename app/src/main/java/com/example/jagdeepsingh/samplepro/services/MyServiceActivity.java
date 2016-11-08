@@ -23,6 +23,7 @@ public class MyServiceActivity extends AppCompatActivity {
 
     public void simpleService(View view) {
         Intent intent = new Intent(this,MySimpleService.class);
+        intent.putExtra("EXTRA","MySimpleService");
         startService(intent);
     }
 

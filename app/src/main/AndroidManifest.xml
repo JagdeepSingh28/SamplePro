@@ -34,13 +34,7 @@
         <activity android:name=".asyncTask.ExecutorActivity" />
         <activity
             android:name=".headless.HeadlessActivity"
-            android:screenOrientation="fullSensor" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".recycler.MyRecyclerActivity"
             android:screenOrientation="fullSensor" />
@@ -68,8 +62,14 @@
         <activity android:name=".material.transition.SecondTransitionActivity" />
         <activity android:name=".wear.SelfNotificationActivity" />
         <activity android:name=".firebase.realTimeDatabase.activity.UploadUserActivity" />
-        <activity android:name=".firebase.realTimeDatabase.activity.IotActivity"></activity>
-        <activity android:name=".services.MyServiceActivity" />
+        <activity android:name=".firebase.realTimeDatabase.activity.IotActivity" />
+        <activity android:name=".services.MyServiceActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <service
             android:name=".services.MySimpleService"
@@ -103,16 +103,24 @@
 
         <activity
             android:name=".activity.ListActivity"
-            android:parentActivityName=".activity.LaunchActivity"></activity>
+            android:parentActivityName=".activity.LaunchActivity" />
         <activity
             android:name=".activity.DetailActivity"
             android:launchMode="singleTask"
             android:parentActivityName=".activity.ListActivity" />
         <activity android:name=".activity.LaunchActivity" />
-        <activity android:name=".material.collapsingToolBar.CollapsingToolbarActivity">
+        <activity android:name=".material.collapsingToolBar.CollapsingToolbarActivity" />
+        <activity android:name=".webView.WebViewActivity" />
+        <activity android:name=".handler.ThreadActivity" />
+        <activity android:name=".handler.HandlerThreadActivity">
         </activity>
-        <activity android:name=".webView.WebViewActivity">
 
+        <service
+            android:name=".services.bound.MyBoundService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <activity android:name=".services.bound.BoundActivity">
         </activity>
     </application>
 

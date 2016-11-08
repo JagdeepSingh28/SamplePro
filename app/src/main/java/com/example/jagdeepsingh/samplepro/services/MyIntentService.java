@@ -19,8 +19,8 @@ public class MyIntentService extends IntentService {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i(TAG, "onStartCommand: ");
-        return 1;
+        Log.i(TAG, "onStartCommand: "+ startId);
+        return START_STICKY;
     }
 
     @Override
