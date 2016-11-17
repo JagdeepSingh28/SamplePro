@@ -63,13 +63,7 @@
         <activity android:name=".wear.SelfNotificationActivity" />
         <activity android:name=".firebase.realTimeDatabase.activity.UploadUserActivity" />
         <activity android:name=".firebase.realTimeDatabase.activity.IotActivity" />
-        <activity android:name=".services.MyServiceActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".services.MyServiceActivity" />
 
         <service
             android:name=".services.MySimpleService"
@@ -91,7 +85,7 @@
         <activity android:name=".wirelessConnectivity.p2p.P2pActivity" />
         <activity android:name=".imageCaching.CacheDemoActivity" />
         <activity android:name=".imageCaching.demo.ImageViewFromURLActivity" />
-        <activity android:name=".contentProvider.DatabaseActivity" />
+        <activity android:name=".contentProvider.DatabaseActivity"></activity>
         <activity android:name=".contentProvider.CountryEdit" />
 
         <provider
@@ -112,15 +106,22 @@
         <activity android:name=".material.collapsingToolBar.CollapsingToolbarActivity" />
         <activity android:name=".webView.WebViewActivity" />
         <activity android:name=".handler.ThreadActivity" />
-        <activity android:name=".handler.HandlerThreadActivity">
-        </activity>
+        <activity android:name=".handler.HandlerThreadActivity" />
 
         <service
             android:name=".services.bound.MyBoundService"
             android:enabled="true"
             android:exported="false" />
 
-        <activity android:name=".services.bound.BoundActivity">
+        <activity android:name=".services.bound.BoundActivity" />
+        <activity android:name=".material.constraint.ListConstraint">
+        </activity>
+        <activity android:name=".RxRetro.view.ActivityView">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

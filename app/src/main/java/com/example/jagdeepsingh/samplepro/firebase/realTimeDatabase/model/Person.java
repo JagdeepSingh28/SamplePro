@@ -3,6 +3,13 @@ package com.example.jagdeepsingh.samplepro.firebase.realTimeDatabase.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
+
 /**
  * Created by Jagdeep.Singh on 13-09-2016.
  */
@@ -10,6 +17,12 @@ public class Person implements Parcelable{
     //name and password string
     private String name;
     private String password;
+    private HashMap<String,String> hashMap;
+    private Map<String,String> map;
+    private List<String> mList;
+    private Set<String> mSet;
+    private Queue<String> mQueue;
+    private ArrayList<String> mArrayList;
 
     public Person() {
       /*Blank default constructor essential for Firebase*/
@@ -29,6 +42,7 @@ public class Person implements Parcelable{
 
     public void setPassword(String password) {
         this.password = password;
+        System.out.println(new Person());
     }
 
     @Override
