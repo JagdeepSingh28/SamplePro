@@ -1,10 +1,7 @@
-package com.example.jagdeepsingh.samplepro.camera;
-
-/**
- * Created by Jagdeep.Singh on 09-08-2016.
- */
+package com.example.jagdeepsingh.samplepro.camera2;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
@@ -20,6 +17,7 @@ import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -48,16 +46,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
-public class AndroidCameraApi2 extends AppCompatActivity {
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+public class AndroidCameraApi extends AppCompatActivity {
     private static final String TAG = "AndroidCameraApi";
     private Button takePictureButton;
     private TextureView textureView;
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 0);
-        ORIENTATIONS.append(Surface.ROTATION_90, 270);
-        ORIENTATIONS.append(Surface.ROTATION_180, 90);
+        ORIENTATIONS.append(Surface.ROTATION_90, 90);
+        ORIENTATIONS.append(Surface.ROTATION_180, 270);
         ORIENTATIONS.append(Surface.ROTATION_270, 180);
     }
     private String cameraId;
@@ -72,12 +70,13 @@ public class AndroidCameraApi2 extends AppCompatActivity {
     private boolean mFlashSupported;
     private Handler mBackgroundHandler;
     private HandlerThread mBackgroundThread;
+    private int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_android_camera_api);
-        textureView =  (TextureView) findViewById(R.id.texture);
+        setContentView(R.layout.activity_android_camera_api2);
+        textureView = (TextureView) findViewById(R.id.texture);
         assert textureView != null;
         textureView.setSurfaceTextureListener(textureListener);
         takePictureButton = (Button) findViewById(R.id.btn_takepicture);
@@ -125,14 +124,7 @@ public class AndroidCameraApi2 extends AppCompatActivity {
             cameraDevice = null;
         }
     };
-    final CameraCaptureSession.CaptureCallback captureCallbackListener = new CameraCaptureSession.CaptureCallback() {
-        @Override
-        public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
-            super.onCaptureCompleted(session, request, result);
-            Toast.makeText(AndroidCameraApi2.this, "Saved:" + file, Toast.LENGTH_SHORT).show();
-            createCameraPreview();
-        }
-    };
+
     protected void startBackgroundThread() {
         mBackgroundThread = new HandlerThread("Camera Background");
         mBackgroundThread.start();
@@ -174,14 +166,12 @@ public class AndroidCameraApi2 extends AppCompatActivity {
             captureBuilder.addTarget(reader.getSurface());
             captureBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
             // Orientation
-            int rotation = getWindowManager().getDefaultDisplay().getRotation() +1;
-            Log.i(TAG, "takePicture: orientation is" + rotation);
+            int rotation = getWindowManager().getDefaultDisplay().getRotation() ;
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
-            final File file = new File(Environment.getExternalStorageDirectory()+"/pic2.jpg");
+            final File file = new File(Environment.getExternalStorageDirectory()+"/pic"+ count +".jpg" );
             ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
                 @Override
                 public void onImageAvailable(ImageReader reader) {
-                    Log.i(TAG, "onImageAvailable");
                     Image image = null;
                     try {
                         image = reader.acquireLatestImage();
@@ -200,19 +190,14 @@ public class AndroidCameraApi2 extends AppCompatActivity {
                     }
                 }
                 private void save(byte[] bytes) throws IOException {
-                    Log.i(TAG, "onImageAvailable Image Saved");
                     OutputStream output = null;
                     try {
                         output = new FileOutputStream(file);
                         output.write(bytes);
-
-//                        Intent intent= new Intent();
-//                        intent.putExtra("file",file.toString());
-//                        setResult(Activity.RESULT_OK,intent);
-//                        finish();
                     } finally {
                         if (null != output) {
                             output.close();
+                            finish();
                         }
                     }
                 }
@@ -222,7 +207,7 @@ public class AndroidCameraApi2 extends AppCompatActivity {
                 @Override
                 public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
-                    Toast.makeText(AndroidCameraApi2.this, "Saved:" + file, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AndroidCameraApi.this, "Saved:" + file, Toast.LENGTH_SHORT).show();
                     createCameraPreview();
                 }
             };
@@ -261,17 +246,17 @@ public class AndroidCameraApi2 extends AppCompatActivity {
                     // When the session is ready, we start displaying the preview.
                     cameraCaptureSessions = cameraCaptureSession;
                     updatePreview();
+                    takePicture();
                 }
                 @Override
                 public void onConfigureFailed(@NonNull CameraCaptureSession cameraCaptureSession) {
-                    Toast.makeText(AndroidCameraApi2.this, "Configuration change", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AndroidCameraApi.this, "Configuration change", Toast.LENGTH_SHORT).show();
                 }
             }, null);
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
     }
-    
     private void openCamera() {
         CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         Log.e(TAG, "is camera open");
@@ -283,7 +268,7 @@ public class AndroidCameraApi2 extends AppCompatActivity {
             imageDimension = map.getOutputSizes(SurfaceTexture.class)[0];
             // Add permission for camera and let user grant the permission
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(AndroidCameraApi2.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CAMERA_PERMISSION);
+//                ActivityCompat.requestPermissions(AndroidCameraApi.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CAMERA_PERMISSION);
                 return;
             }
             manager.openCamera(cameraId, stateCallback, null);
@@ -318,7 +303,7 @@ public class AndroidCameraApi2 extends AppCompatActivity {
         if (requestCode == REQUEST_CAMERA_PERMISSION) {
             if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
                 // close the app
-                Toast.makeText(AndroidCameraApi2.this, "Sorry!!!, you can't use this app without granting permission", Toast.LENGTH_LONG).show();
+                Toast.makeText(AndroidCameraApi.this, "Sorry!!!, you can't use this app without granting permission", Toast.LENGTH_LONG).show();
                 finish();
             }
         }

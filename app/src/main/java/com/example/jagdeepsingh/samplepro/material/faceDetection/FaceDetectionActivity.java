@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.jagdeepsingh.samplepro.R;
-import com.example.jagdeepsingh.samplepro.camera.AndroidCameraApi2;
 import com.example.jagdeepsingh.samplepro.material.faceDetection.view.FaceOverLayView;
 
 import java.io.InputStream;
@@ -50,8 +49,8 @@ public class FaceDetectionActivity extends AppCompatActivity {
     }
 
     public void TakePic(View view){
-        Intent intent = new Intent(FaceDetectionActivity.this, AndroidCameraApi2.class);
-        startActivityForResult(intent,REQUEST_CODE);
+//        Intent intent = new Intent(FaceDetectionActivity.this, AndroidCameraApi2.class);
+//        startActivityForResult(intent,REQUEST_CODE);
     }
 
     public void DetectFace(View view){

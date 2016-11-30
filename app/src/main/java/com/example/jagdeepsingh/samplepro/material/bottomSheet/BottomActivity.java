@@ -1,6 +1,5 @@
 package com.example.jagdeepsingh.samplepro.material.bottomSheet;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.jagdeepsingh.samplepro.R;
-import com.example.jagdeepsingh.samplepro.camera.service.SimpleCamera2ServicePublish;
 
 /**
  * Created by jagdeep.singh on 22-08-2016.
@@ -63,12 +61,10 @@ public class BottomActivity extends AppCompatActivity implements View.OnClickLis
         switch( v.getId() ) {
             case R.id.button_1: {
 //                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                startService(new Intent(BottomActivity.this, SimpleCamera2ServicePublish.class));
                 break;
             }
             case R.id.button_2: {
 //                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                stopService(new Intent(BottomActivity.this, SimpleCamera2ServicePublish.class));
                 break;
             }
             case R.id.button_3: {
