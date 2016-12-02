@@ -31,7 +31,13 @@
             android:value="AIzaSyAqFovy_6CmSHPJIodZ7VeDrCE5QGIR3J8" />
 
         <activity android:name=".MainActivity" />
-        <activity android:name=".asyncTask.ExecutorActivity" />
+        <activity android:name=".asyncTask.ExecutorActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            </activity>
         <activity
             android:name=".headless.HeadlessActivity"
             android:screenOrientation="fullSensor" />
@@ -104,12 +110,11 @@
         <activity android:name=".services.bound.BoundActivity" />
         <activity android:name=".material.constraint.ListConstraint" />
         <activity android:name=".RxRetro.view.ActivityView" />
-        <activity android:name=".GodActivity.activity.MyChildActivity"></activity>
+        <activity android:name=".GodActivity.activity.MyChildActivity" />
         <activity
             android:name=".camera2.AndroidCameraApi"
-            android:theme="@style/Theme.Transparent"
-            android:excludeFromRecents="true">
-        </activity>
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.Transparent" />
 
         <receiver android:name=".camera2.reciever.UserPresentBroadcastReceiver">
             <intent-filter>
@@ -117,12 +122,14 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".camera2.EntryCameraActivity" android:excludeFromRecents="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity
+            android:name=".camera2.EntryCameraActivity"
+            android:excludeFromRecents="true">
         </activity>
+        <activity android:name=".eventBus.activities.SourceActivity">
+
+        </activity>
+        <activity android:name=".eventBus.activities.DestinationActivity"></activity>
     </application>
 
 </manifest>

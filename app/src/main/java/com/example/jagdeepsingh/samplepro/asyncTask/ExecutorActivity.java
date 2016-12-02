@@ -1,6 +1,5 @@
 package com.example.jagdeepsingh.samplepro.asyncTask;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -38,7 +37,8 @@ public class ExecutorActivity extends AppCompatActivity{
 
         for (int i = 0; i < 5; i++) {
             Log.i(TAG, "onCreate: ");
-            new MyAsyncTask("Thread " + i).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//            new MyAsyncTask("Thread " + i).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            new MyAsyncTask("Thread " + i).execute();
         }
 
     }
