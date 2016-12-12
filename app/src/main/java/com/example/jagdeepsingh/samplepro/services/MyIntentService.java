@@ -9,10 +9,6 @@ public class MyIntentService extends IntentService {
 
     public static final String TAG = MyIntentService.class.getSimpleName();
 
-    public MyIntentService() {
-        super("MyIntentService");
-    }
-
     public MyIntentService(String name) {
         super(name);
     }

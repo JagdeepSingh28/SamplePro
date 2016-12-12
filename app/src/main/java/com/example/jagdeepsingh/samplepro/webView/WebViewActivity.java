@@ -9,6 +9,8 @@ import com.example.jagdeepsingh.samplepro.R;
 
 public class WebViewActivity extends AppCompatActivity {
 
+    private WebView webView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +21,7 @@ public class WebViewActivity extends AppCompatActivity {
             WebView.setWebContentsDebuggingEnabled(true);
         }
 
-        WebView webView=(WebView)findViewById(R.id.webview);
+        webView=(WebView)findViewById(R.id.webview);
 
         String html_string="<!DOCTYPE html>\n"
                 + "<html>\n"
@@ -33,7 +35,14 @@ public class WebViewActivity extends AppCompatActivity {
                 + "</body>\n"
                 + "</html>";
 
-
         webView.loadData(html_string,"text/html","UTF-8");
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(webView.canGoBack())
+            webView.goBack();
+        else
+            super.onBackPressed();
     }
 }

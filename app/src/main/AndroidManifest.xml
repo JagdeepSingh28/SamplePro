@@ -31,13 +31,7 @@
             android:value="AIzaSyAqFovy_6CmSHPJIodZ7VeDrCE5QGIR3J8" />
 
         <activity android:name=".MainActivity" />
-        <activity android:name=".asyncTask.ExecutorActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            </activity>
+        <activity android:name=".asyncTask.ExecutorActivity" />
         <activity
             android:name=".headless.HeadlessActivity"
             android:screenOrientation="fullSensor" />
@@ -117,19 +111,41 @@
             android:theme="@style/Theme.Transparent" />
 
         <receiver android:name=".camera2.reciever.UserPresentBroadcastReceiver">
+
+            <!--
             <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
+            -->
         </receiver>
 
         <activity
             android:name=".camera2.EntryCameraActivity"
-            android:excludeFromRecents="true">
-        </activity>
-        <activity android:name=".eventBus.activities.SourceActivity">
+            android:excludeFromRecents="true" />
+        <activity android:name=".eventBus.activities.SourceActivity" />
+        <activity android:name=".eventBus.activities.DestinationActivity" />
+        <activity android:name=".imageCaching.demo.TCMainActivity" />
+        <activity android:name=".imageCaching.demo.TC2" />
+        <activity android:name=".asyncTask.AsyncTestActivity1"></activity>
+        <activity android:name=".asyncTask.AsyncTaskActivity2" />
+        <activity android:name=".DownloadManager.intentDownloader.activity.CustomDownloadActivity">
 
         </activity>
-        <activity android:name=".eventBus.activities.DestinationActivity"></activity>
+
+        <receiver android:name=".InternetObserver.NetworkChangeReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".InternetObserver.IntenetActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
