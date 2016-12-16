@@ -22,4 +22,39 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_meeting">MeetingActivity</string>
+
+
+    <string-array name="meeting_places">
+        <item>Delhi</item>
+        <item>Mumbai</item>
+        <item>Chennai</item>
+        <item>Bangalore</item>
+        <item>Hyderabad</item>
+        <item>Gurugram</item>
+        <item>Noida</item>
+    </string-array>
+
+    <string-array name="restaurant_listing">
+        <item>restaurant1</item>
+        <item>restaurant2</item>
+        <item>restaurant3</item>
+        <item>restaurant4</item>
+        <item>restaurant5</item>
+        <item>restaurant6</item>
+        <item>restaurant7</item>
+    </string-array>
+
+    <string-array name="num_guest">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+    <string name="title_activity_dinner">DinnerActivity</string>
+
+
 </resources>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This Package include"
+        android:textSize="22sp"
+        android:textColor="@color/colorPrimary"/>
+
+    <LinearLayout
+        android:id="@+id/foodmenu_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/foodmenu_tv"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/subpackage1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8dp"
+            android:text="Veg Package"
+            android:textSize="14sp"
+            android:onClick="packageSelected"/>
+
+        <TextView
+            android:id="@+id/subpackage2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8dp"
+            android:text="Nnn Veg Package"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/subpackage3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8dp"
+            android:text="Full Package"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/subpackage4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8dp"
+            android:text="Veg Package2"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right">
+
+
+        <Button
+            android:id="@+id/date_time_cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="cancel" />
+
+        <Button
+            android:id="@+id/date_time_set_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select" />
+
+    </LinearLayout>
+
+</LinearLayout>

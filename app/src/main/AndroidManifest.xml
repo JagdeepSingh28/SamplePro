@@ -18,6 +18,7 @@
     <uses-permission
         android:name="android.permission.CHANGE_WIFI_STATE"
         android:required="true" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <application
         android:name=".MyApplication"
@@ -59,6 +60,10 @@
             android:exported="true" />
         <service
             android:name=".services.MyIntentService"
+            android:exported="false" />
+
+        <service
+            android:name=".camera2.Service.MyCameraService"
             android:exported="false" />
 
         <activity android:name=".DownloadManager.DownloadManagerActivity" />
@@ -107,30 +112,34 @@
         <activity android:name=".GodActivity.activity.MyChildActivity" />
         <activity
             android:name=".camera2.AndroidCameraApi"
-            android:excludeFromRecents="true"
-            android:theme="@style/Theme.Transparent" />
+            android:excludeFromRecents="true"/>
+
+        <service
+            android:name=".camera2.Service.AndroidCameraApiWithoutSerfaceService"
+            android:excludeFromRecents="true"/>
 
         <receiver android:name=".camera2.reciever.UserPresentBroadcastReceiver">
-
-            <!--
             <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
-            -->
         </receiver>
 
         <activity
             android:name=".camera2.EntryCameraActivity"
-            android:excludeFromRecents="true" />
+            android:excludeFromRecents="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".eventBus.activities.SourceActivity" />
         <activity android:name=".eventBus.activities.DestinationActivity" />
         <activity android:name=".imageCaching.demo.TCMainActivity" />
         <activity android:name=".imageCaching.demo.TC2" />
-        <activity android:name=".asyncTask.AsyncTestActivity1"></activity>
+        <activity android:name=".asyncTask.AsyncTestActivity1" />
         <activity android:name=".asyncTask.AsyncTaskActivity2" />
-        <activity android:name=".DownloadManager.intentDownloader.activity.CustomDownloadActivity">
-
-        </activity>
+        <activity android:name=".DownloadManager.intentDownloader.activity.CustomDownloadActivity" />
 
         <receiver android:name=".InternetObserver.NetworkChangeReceiver">
             <intent-filter>
@@ -139,13 +148,20 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".InternetObserver.IntenetActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".InternetObserver.IntenetActivity"></activity>
+        <activity
+            android:name=".sudan.MeetingActivity"
+            android:label="@string/title_activity_meeting"
+            android:theme="@style/AppTheme">
         </activity>
+        <activity
+            android:name=".sudan.DinnerActivity"
+            android:label="@string/title_activity_dinner"
+            android:theme="@style/AppTheme">
+
+        </activity>
+
+
     </application>
 
 </manifest>
