@@ -8,12 +8,17 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.jagdeepsingh.samplepro.webView.WebViewActivity">
+    tools:context="com.example.jagdeepsingh.samplepro.webview.WebViewActivity">
 
-    <WebView
-        android:id="@+id/webview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-
+    <TextView
+        android:text="Show Web Dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/show_web_dialog_tv"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:onClick="showSDKDialog"
+        android:padding="16dp"/>
 </RelativeLayout>
