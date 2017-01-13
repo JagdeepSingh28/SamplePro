@@ -117,19 +117,22 @@
             android:excludeFromRecents="true" />
 
         <receiver android:name=".camera2.reciever.UserPresentBroadcastReceiver">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.USER_PRESENT" />-->
-            <!--</intent-filter>-->
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.USER_PRESENT" /> -->
+            <!-- </intent-filter> -->
         </receiver>
 
         <activity
             android:name=".camera2.EntryCameraActivity"
             android:excludeFromRecents="true">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".eventBus.activities.SourceActivity" />
         <activity android:name=".eventBus.activities.DestinationActivity" />
@@ -140,10 +143,14 @@
         <activity android:name=".DownloadManager.intentDownloader.activity.CustomDownloadActivity" />
 
         <receiver android:name=".InternetObserver.NetworkChangeReceiver">
-
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
         </receiver>
 
-        <activity android:name=".InternetObserver.IntenetActivity" />
+        <activity android:name=".InternetObserver.IntenetActivity">
+        </activity>
         <activity
             android:name=".sudan.MeetingActivity"
             android:label="@string/title_activity_meeting"
@@ -152,8 +159,9 @@
             android:name=".sudan.DinnerActivity"
             android:label="@string/title_activity_dinner"
             android:theme="@style/AppTheme" />
-        <activity android:name=".webview.WebViewActivity"></activity>
-        <activity android:name=".camera2.videoRecord.Camera2Video">
+        <activity android:name=".webview.WebViewActivity" />
+        <activity android:name=".camera2.videoRecord.Camera2Video"></activity>
+        <activity android:name=".dagger2.Activities.MainDaggerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
