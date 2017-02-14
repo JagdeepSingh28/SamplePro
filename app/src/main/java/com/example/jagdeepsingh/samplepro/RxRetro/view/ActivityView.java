@@ -93,7 +93,8 @@ public class ActivityView extends AppCompatActivity implements View.OnClickListe
     }
 
     public void showRetroResult(Response<FriendResponse> response) {
-        retroResponse.setText(response.body().friendLocations.data.friend.get(0).friendName);
+//        retroResponse.setText(response.body().friendLocations.data.friend.get(0).friendName);
+        retroResponse.setText(response.body().message);
         retroResponse.setVisibility(View.VISIBLE);
         retroCall.setEnabled(true);
         rxCall.setEnabled(true);
@@ -117,7 +118,8 @@ public class ActivityView extends AppCompatActivity implements View.OnClickListe
     }
 
     public void showRxResults(FriendResponse friendResponse) {
-        rxResponse.setText(friendResponse.friendLocations.data.friend.get(0).friendName);
+//        rxResponse.setText(friendResponse.friendLocations.data.friend.get(0).friendName);
+        rxResponse.setText(friendResponse.message);
         rxResponse.setVisibility(View.VISIBLE);
         rxCall.setEnabled(true);
         retroCall.setEnabled(true);

@@ -4,6 +4,8 @@ import com.example.jagdeepsingh.samplepro.RxRetro.model.FriendResponse;
 import com.example.jagdeepsingh.samplepro.RxRetro.model.NetworkService;
 import com.example.jagdeepsingh.samplepro.RxRetro.view.ActivityView;
 
+import java.util.HashMap;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,16 +34,18 @@ public class PresenterLayer implements PresenterInteractor {
     @Override
     public void loadRxData() {
         view.showRxInProcess();
+        HashMap<String,String> params = new HashMap<>();
+        params.put("userEmail","JagdeepRx");
+        params.put("userPassword","JagdeepRx");
         /*
         Without cached case
          */
 //      Observable<FriendResponse> observableCall = service.getAPI().getFriendsObservable();
-
         /*
         Cached case
          */
         Observable<FriendResponse> observableCall = (Observable<FriendResponse>)
-                service.getPreparedObservable(service.getAPI().getFriendsObservable(), FriendResponse.class, true, true);
+                service.getPreparedObservable(service.getAPI().getFriendsObservable(params), FriendResponse.class, true, true);
         subscription = observableCall.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<FriendResponse>() {
@@ -65,7 +69,11 @@ public class PresenterLayer implements PresenterInteractor {
     @Override
     public void loadRetroData() {
         view.showRetroInProcess();
-        Call<FriendResponse> call = service.getAPI().getFriends();
+        HashMap<String,String> params = new HashMap<>();
+        params.put("userEmail","Jagdeep1");
+        params.put("userPassword","Jagdeep1");
+
+        Call<FriendResponse> call = service.getAPI().getFriendsLogin(params);
         call.enqueue(new Callback<FriendResponse>() {
             @Override
             public void onResponse(Call<FriendResponse> call, Response<FriendResponse> response) {

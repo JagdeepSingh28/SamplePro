@@ -5,6 +5,7 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,6 +19,7 @@ public class DatabaseActivity extends Activity
         implements android.app.LoaderManager.LoaderCallbacks<Cursor> {
 
     private SimpleCursorAdapter dataAdapter;
+    private CursorAdapter cursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

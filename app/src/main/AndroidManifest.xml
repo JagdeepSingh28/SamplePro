@@ -106,8 +106,15 @@
 
         <activity android:name=".services.bound.BoundActivity" />
         <activity android:name=".material.constraint.ListConstraint" />
-        <activity android:name=".RxRetro.view.ActivityView" />
-        <activity android:name=".GodActivity.activity.MyChildActivity" />
+        <activity android:name=".RxRetro.view.ActivityView">
+        </activity>
+        <activity android:name=".GodActivity.activity.MyChildActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".camera2.AndroidCameraApi"
             android:excludeFromRecents="true" />
@@ -149,8 +156,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".InternetObserver.IntenetActivity">
-        </activity>
+        <activity android:name=".InternetObserver.IntenetActivity"></activity>
         <activity
             android:name=".sudan.MeetingActivity"
             android:label="@string/title_activity_meeting"
@@ -160,13 +166,9 @@
             android:label="@string/title_activity_dinner"
             android:theme="@style/AppTheme" />
         <activity android:name=".webview.WebViewActivity" />
-        <activity android:name=".camera2.videoRecord.Camera2Video"></activity>
-        <activity android:name=".dagger2.Activities.MainDaggerActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".camera2.videoRecord.Camera2Video" />
+        <activity android:name=".dagger2.Activities.MainDaggerActivity"></activity>
+        <activity android:name=".fragment.MainFragmentContainerActivity">
         </activity>
     </application>
 

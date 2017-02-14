@@ -8,22 +8,34 @@ import java.util.ArrayList;
 
 public class FriendResponse {
 
-    public FriendLocations friendLocations;
+    public String error;
+    public String message;
+    public ArrayList<Data> data;
 
-    public FriendResponse(){
-
+    public class Data{
+        public String userPassword;
+        public String userEmail;
+        public String _id;
     }
 
-    public class FriendLocations {
-        public Data data;
-        public class Data{
-            public ArrayList<Friend> friend = new ArrayList<>();
-            public class Friend{
-                public String friendName;
-                public String friendType;
-                public String lat;
-                public String lon;
-            }
-        }
-    }
+
+
+//    public FriendLocations friendLocations;
+//
+//    public FriendResponse(){
+//
+//    }
+//
+//    public class FriendLocations {
+//        public Data data;
+//        public class Data{
+//            public ArrayList<Friend> friend = new ArrayList<>();
+//            public class Friend{
+//                public String friendName;
+//                public String friendType;
+//                public String lat;
+//                public String lon;
+//            }
+//        }
+//    }
 }

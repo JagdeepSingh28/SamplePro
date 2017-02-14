@@ -77,5 +77,6 @@
     <string name="error_email">Email must be valid</string>
     <string name="error_address">Address can\'t be empty</string>
     <string name="error_phone">Phone number must be valid</string>
+    <string name="listing_fragment_text">This is Listing Fragment</string>
 
 </resources>
